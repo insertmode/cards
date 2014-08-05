@@ -1,0 +1,31 @@
+{
+  "name": "cards",
+  "version": "0.0.0",
+  "description": "cards for facts to memorize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cards",
+    "memorize"
+  ],
+  "author": "Jan Bölsche",
+  "license": "ISC",
+  "browserify": {
+    "transform": [
+      "ejsify",
+      "stylify"
+    ]
+  },
+  "dependencies": {
+    "ejsify": "^0.1.0",
+    "stylify": "^0.1.5",
+    "browserify": "^5.9.1",
+    "insert-css": "^0.2.0",
+    "insert-stylesheet": "0.0.0"
+  },
+  "devDependencies": {
+    "prova": "^1.14.0"
+  }
+}

@@ -1,0 +1,59 @@
+@import nib
+
+ColorCode = rgba(255,255,10,0.7)
+Width =  200px
+Height = 280px
+Darken = rgba(0,0,0,0.2)
+Lighten = rgba(255,255,255,0.1)
+ImageHeight = Height * 0.6
+
+html, body
+    background-color: #888
+
+.card
+    margin: 10px
+    position: relative
+    width: Width*3
+    height: Height
+    box-sizing: border-box
+    
+    h1
+        font-family: 'Francois One', sans-serif;
+        margin-top: .2em
+        text-transform: uppercase
+        white-space: no-wrap
+        font-size: 1.2em
+        color: rgba(0,0,0,0.8)
+    h2
+        font-size: 1em
+
+    .front, .back
+        box-sizing: border-box
+        //position: absolute
+        display: inline-block
+        float: left
+        left: 0
+        top: 0
+        width: Width
+        height: Height
+        padding: 1.5em
+        border-right: 1px solid Darken
+        border-bottom: 1px solid Darken
+        background-color:#eee
+        border-left: 1px solid Lighten
+        border-top: 1px solid Lighten
+        backface-visibility: hidden
+        border-radius: 20px
+
+    .front
+        padding-top: ImageHeight
+        background:
+            url(run/samuel_morse.jpg) 0px 0px no-repeat,
+            linear-gradient(top,ColorCode,ColorCode) 0px ImageHeight no-repeat
+        background-size: auto ImageHeight, 100% 30px
+        background-clip: border-box
+        background-origin: border-box
+        background-color: white
+   
+    //.back
+    //    transform: rotateX(-180deg)
