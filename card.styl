@@ -1,10 +1,15 @@
 @import nib
 
-ColorCode = rgba(255,255,10,0.7)
+ColorCode = rgba(255,250,10,0.7)
+BackPatternSize = 40px
+
 Width =  200px
 Height = 280px
+Radius = 25px
+
+
 Darken = rgba(0,0,0,0.2)
-Lighten = rgba(255,255,255,0.1)
+Lighten = rgba(255,255,255,0.15)
 ImageHeight = Height * 0.6
 
 html, body
@@ -13,9 +18,10 @@ html, body
 .card
     margin: 10px
     position: relative
-    width: Width*3
+    width: Width
     height: Height
     box-sizing: border-box
+    display: inline-block
     
     h1
         font-family: 'Francois One', sans-serif;
@@ -29,7 +35,8 @@ html, body
 
     .front, .back
         box-sizing: border-box
-        //position: absolute
+        box-shadow: inset 1px 0 1px rgba(255,255,255,0.6)
+        position: absolute
         display: inline-block
         float: left
         left: 0
@@ -43,7 +50,7 @@ html, body
         border-left: 1px solid Lighten
         border-top: 1px solid Lighten
         backface-visibility: hidden
-        border-radius: 20px
+        border-radius: Radius 
 
     .front
         padding-top: ImageHeight
@@ -54,6 +61,31 @@ html, body
         background-clip: border-box
         background-origin: border-box
         background-color: white
-   
-    //.back
-    //    transform: rotateX(-180deg)
+       
+    .back
+        HalfBackPatternSize = BackPatternSize/2
+        PatternCOlor2 = Lighten
+        background-color:ColorCode;
+        background-image: radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%),
+        radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%);
+        background-size:BackPatternSize BackPatternSize;
+        background-position:0 0, HalfBackPatternSize HalfBackPatternSize 
+        transform: rotateY(-180deg)
+
+    .front:after, .back:after
+        position: absolute;
+        content: ' '
+        width: 100%
+        height: 50%
+        top: 0
+        left: 0
+        border-radius: Radius
+        background: linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,.1) 100%)
+        opacity: 0.8
+
+.card.flip
+    .front
+        transform: rotateY(-180deg)
+    .back
+        transform: rotateY(0deg)
+        
