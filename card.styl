@@ -1,95 +1,159 @@
 @import nib
 
-ColorCode = rgba(255,250,10,0.7)
-BackPatternSize = 40px
+Duration = 1.5s
 
-Width =  200px
-Height = 280px
-Radius = 25px
+Categories = \
+    (history rgba(255,250,10,0.7))\
+    (tech #444)\
+    (social midnightblue)
 
+.card a
+    font-family: serif
+    float right
+    color: #000
+    text-decoration: none
 
-Darken = rgba(0,0,0,0.2)
-Lighten = rgba(255,255,255,0.15)
-ImageHeight = Height * 0.6
-
-html, body
-    background-color: #888
-
-.card
-    font-family: 'Francois One', sans-serif;
-    margin: 10px
+.card a:before
+    content: ''
     position: relative
-    width: Width
-    height: Height
-    box-sizing: border-box
+    left: 1em
+    top: 1px
     display: inline-block
-    
-    h1
-        margin-top: .2em
-        text-transform: uppercase
-        white-space: no-wrap
-        font-size: 1.2em
-        color: rgba(0,0,0,0.8)
-    h2
-        font-size: 1em
+    box-shadow: 0 0 1px 1px black
+    text-decoration: none
+    border-radius: 50%
+    width: 1em
+    height: 1em
 
-    .front, .back
-        box-sizing: border-box
-        box-shadow: inset 1px 0 1px rgba(255,255,255,0.6)
-        position: absolute
-        display: inline-block
-        float: left
-        left: 0
-        top: 0
+.card .memory-level
+    absolute: bottom 10px 
+
+.card .memory-level i
+    color: black
+    opacity: 0.3
+
+.card .memory-level i:first-of-type
+    opacity: 0.8
+
+@keyframes back_flip_animation {
+    0% {
+        animation-timing-function: ease-in
+        transform: rotateY(0deg)
+    }
+    100% {
+        animation-timing-function: ease-in-out
+        transform: rotateY(180deg)
+    }
+}
+
+@keyframes front_flip_animation {
+    0% {
+        animation-timing-function: ease-in
+        transform: rotateY(180deg)
+    }
+    100% {
+        animation-timing-function: ease-in-out
+        transform: rotateY(0deg)
+    }
+}
+
+
+   
+for Category in Categories
+    ClassName = Category[0]
+    ColorCode = Category[1]
+    FrontH1Color = light(ColorCode) ? black : white - 25%
+    BackFontColor = FrontH1Color
+    BackPatternSize = 40px
+
+    Width =  200px
+    Height = 280px
+    Radius = 25px
+
+
+    Darken = rgba(0,0,0,0.2)
+    Lighten = rgba(255,255,255,0.15)
+    ImageHeight = Height * 0.6
+
+    html, body
+        background-color: #888
+
+    .card.{ClassName}
+        font-family: 'Francois One', sans-serif;
+        margin: 10px
+        position: relative
         width: Width
         height: Height
-        padding: 1.5em
-        border-right: 1px solid Darken
-        border-bottom: 1px solid Darken
-        background-color:#eee
-        border-left: 1px solid Lighten
-        border-top: 1px solid Lighten
-        backface-visibility: hidden
-        border-radius: Radius 
-
-    .front
-        padding-top: ImageHeight
-        background:
-            url(run/samuel_morse.jpg) 0px 0px no-repeat,
-            linear-gradient(top,ColorCode,ColorCode) 0px ImageHeight no-repeat
-        background-size: auto ImageHeight, 100% 30px
-        background-clip: border-box
-        background-origin: border-box
-        background-color: white
-       
-    .back
-        HalfBackPatternSize = BackPatternSize/2
-        PatternCOlor2 = Lighten
-        background-color:ColorCode;
-        background-image: radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%),
-        radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%);
-        background-size:BackPatternSize BackPatternSize;
-        background-position:0 0, HalfBackPatternSize HalfBackPatternSize 
-        transform: rotateY(-180deg)
-
-    .front:after, .back:after
-        position: absolute;
-        content: ' '
-        width: 100%
-        height: 50%
-        top: 0
-        left: 0
-        border-top-left-radius: Radius 
-        border-top-right-radius: Radius 
-        border-bottom-left-radius: 75%
-        border-bottom-right-radius: 8%
-        box-shadow: inset 0 0 128px rgba(255,255,255,0.5)
-        background: linear-gradient(top right, rgba(200,200,255,1) 0%,rgba(255,255,255,.1) 100%)
-        opacity: 0.3
-
-.card.flip
-    .front
-        transform: rotateY(-180deg)
-    .back
-        transform: rotateY(0deg)
+        box-sizing: border-box
+        display: inline-block
         
+        h1
+            margin-top: .2em
+            text-transform: uppercase
+            white-space: no-wrap
+            font-size: 1.2em
+            color: FrontH1Color 
+        h2
+            font-size: 1em
+
+        .front, .back
+            box-sizing: border-box
+            box-shadow: inset 1px 0 1px rgba(255,255,255,0.6)
+            position: absolute
+            display: inline-block
+            float: left
+            left: 0
+            top: 0
+            width: Width
+            height: Height
+            padding: 1.5em
+            border-right: 1px solid Darken
+            border-bottom: 1px solid Darken
+            background-color:#eee
+            border-left: 1px solid Lighten
+            border-top: 1px solid Lighten
+            backface-visibility: hidden
+            border-radius: Radius 
+
+        .front
+            padding-top: ImageHeight
+            background:
+                url(run/samuel_morse.jpg) 0px 0px no-repeat,
+                linear-gradient(top,ColorCode,ColorCode) 0px ImageHeight no-repeat
+            background-size: auto ImageHeight, 100% 30px
+            background-clip: border-box
+            background-origin: border-box
+            background-color: white
+           
+        .back
+            color: BackFontColor
+            HalfBackPatternSize = BackPatternSize/2
+            PatternCOlor2 = Lighten
+            background-color:ColorCode;
+            background-image: radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%),
+            radial-gradient(closest-side, transparent 98%, PatternCOlor2 99%);
+            background-size:BackPatternSize BackPatternSize;
+            background-position:0 0, HalfBackPatternSize HalfBackPatternSize 
+            transform: rotateY(-180deg)
+
+        .front:after, .back:after
+            position: absolute;
+            content: ' '
+            width: 100%
+            height: 50%
+            top: 0
+            left: 0
+            border-top-left-radius: Radius 
+            border-top-right-radius: Radius 
+            border-bottom-left-radius: 75%
+            border-bottom-right-radius: 8%
+            box-shadow: inset 0 0 128px rgba(255,255,255,0.5)
+            background: linear-gradient(top right, rgba(200,200,255,1) 0%,rgba(255,255,255,.1) 100%)
+            opacity: 0.3
+
+    .card.flip
+        .front
+            animation: front_flip_animation Duration
+        .back
+            animation: back_flip_animation Duration
+            

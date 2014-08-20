@@ -5,9 +5,14 @@ var front = require('../front.ejs')();
 var back = require('../back.ejs')();
 
 test('can create a card', function(assert) {
-    assert.plan(1);
-    html=createCard(front, back);
-    document.body.innerHTML = html + html;
+    assert.plan(2);
+    var cardElement = createCard(front, back);
+    document.body.innerHTML = '';
+    assert.ok(cardElement);
+    document.body.appendChild(cardElement);
+    
+    cardElement = createCard(front, back);
+    assert.ok(cardElement);
+    document.body.appendChild(cardElement);
     document.getElementsByClassName('card')[1].classList.add('flip');
-    assert.ok(html);
 });
