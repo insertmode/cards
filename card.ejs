@@ -1,5 +1,17 @@
 <div class="front">
     <%- front %>
+    <div class="memory-level">
+        <% for (var i=0; i<4; i++) { %>
+            <% if (i < memo_level) { %>
+                <i class="activated fa fa-check-circle-o"></i>
+            <% } else { %>
+                <i class="fa fa-check-circle-o"></i>
+            <% } %>
+        <% } %>
+    </div>
+    <% if (wiki_href) { %>
+        <a href="<%= wiki_href %>">W</a>
+    <% } %>
 </div>
 <div class="back">
     <%- back %>
